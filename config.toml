@@ -1,0 +1,74 @@
+
+[paths]
+
+# Datasets
+vrd = "/mnt/data/work/datasets/vrd"
+vg = "/mnt/data/work/datasets/vg"
+gqa = "/mnt/data/work/datasets/gqa"
+teresa = "/mnt/data/work/datasets/teresa"
+
+# Others
+yolo = "/mnt/data/work/yolo-weights/yolov4-320"
+java = "/home/feramozur/Downloads/Protege-5.5.0/jre/bin/java"
+
+[model]
+
+# VG-SGG
+#variant = "VgSgg+NoFilter"
+#variant = "VgSgg+Filter+NoAug"
+variant = "VgSgg+Filter+WithAug"
+
+# VG-indoor
+#variant = "VgIndoor+NoFilter"
+#variant = "VgIndoor+Filter+NoAug"
+#variant = "VgIndoor+Filter+WithAug"
+
+[train]
+
+# VG-SGG
+#dataset = "vg"
+#dataset = "vgteresanoaug"
+dataset = "vgteresa"
+
+# VG-indoor
+#dataset = "vgfilter"
+#dataset = "vgfilterteresanoaug"
+#dataset = "vgfilterteresa"
+
+random_seed = 3135134162
+
+lr = 0.00001
+wd = 0.00001
+epochs = 20
+early_stopping = 2
+
+[test]
+
+dataset = "teresa"
+use_post_proc = true
+
+[convert]
+
+dataset = "vg"
+augmentation = true
+
+[stratify]
+
+dataset = "vgteresa"
+split_size = 0.1
+
+[teresa.qualitative]
+
+prefers_subject = [ "person" ]
+prefers_object  = [ "table", "counter" ]
+
+[teresa.predicate_map]
+
+"in front of" = [ "in front of" ]
+"next to"     = [ "near" ]
+"below"       = [ "under" ]
+"behind"      = [ "behind" ]
+"on top of"   = [ "above", "laying on", "mounted on", "on", "over" ]
+"holding"     = [ "carrying", "holding" ]
+"sitting at"  = [ "sitting on" ]
+"sitting on"  = [ "sitting on" ]

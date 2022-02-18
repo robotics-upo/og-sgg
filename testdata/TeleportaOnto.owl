@@ -1,0 +1,358 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://robotics.upo.es/ontologies/teleporta#"
+     xml:base="http://robotics.upo.es/ontologies/teleporta"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://robotics.upo.es/ontologies/teleporta">
+        <rdfs:comment>Ontology for TELEPoRTA</rdfs:comment>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#behind -->
+
+    <owl:ObjectProperty rdf:about="http://robotics.upo.es/ontologies/teleporta#behind">
+        <owl:inverseOf rdf:resource="http://robotics.upo.es/ontologies/teleporta#inFrontOf"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:label>behind</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#below -->
+
+    <owl:ObjectProperty rdf:about="http://robotics.upo.es/ontologies/teleporta#below">
+        <owl:inverseOf rdf:resource="http://robotics.upo.es/ontologies/teleporta#onTopOf"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Appliance"/>
+                    <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Counter"/>
+                    <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Table"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Appliance"/>
+                    <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#GrabbableObject"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+        <rdfs:label>below</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#holding -->
+
+    <owl:ObjectProperty rdf:about="http://robotics.upo.es/ontologies/teleporta#holding">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://robotics.upo.es/ontologies/teleporta#Person"/>
+        <rdfs:range rdf:resource="http://robotics.upo.es/ontologies/teleporta#GrabbableObject"/>
+        <rdfs:label>holding</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#inFrontOf -->
+
+    <owl:ObjectProperty rdf:about="http://robotics.upo.es/ontologies/teleporta#inFrontOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:label>in front of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#nextTo -->
+
+    <owl:ObjectProperty rdf:about="http://robotics.upo.es/ontologies/teleporta#nextTo">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdfs:label>next to</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#onTopOf -->
+
+    <owl:ObjectProperty rdf:about="http://robotics.upo.es/ontologies/teleporta#onTopOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Appliance"/>
+                    <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#GrabbableObject"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Appliance"/>
+                    <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Counter"/>
+                    <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Table"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+        <rdfs:label>on top of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#sittingAt -->
+
+    <owl:ObjectProperty rdf:about="http://robotics.upo.es/ontologies/teleporta#sittingAt">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://robotics.upo.es/ontologies/teleporta#Person"/>
+        <rdfs:range rdf:resource="http://robotics.upo.es/ontologies/teleporta#Table"/>
+        <rdfs:label>sitting at</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#sittingOn -->
+
+    <owl:ObjectProperty rdf:about="http://robotics.upo.es/ontologies/teleporta#sittingOn">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://robotics.upo.es/ontologies/teleporta#Person"/>
+        <rdfs:range rdf:resource="http://robotics.upo.es/ontologies/teleporta#Chair"/>
+        <rdfs:label>sitting on</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#Appliance -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/teleporta#Appliance">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/teleporta#Furniture"/>
+        <rdfs:label>appliance</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#Camera -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/teleporta#Camera">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/teleporta#GrabbableObject"/>
+        <rdfs:label>camera</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#Chair -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/teleporta#Chair">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/teleporta#Furniture"/>
+        <rdfs:label>chair</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#Counter -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/teleporta#Counter">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/teleporta#Furniture"/>
+        <rdfs:label>counter</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#Cup -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/teleporta#Cup">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/teleporta#GrabbableObject"/>
+        <rdfs:label>cup</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#Door -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/teleporta#Door">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/teleporta#Furniture"/>
+        <rdfs:label>door</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#Entrance -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/teleporta#Entrance">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/teleporta#Furniture"/>
+        <rdfs:label>entrance</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#Food -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/teleporta#Food">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/teleporta#GrabbableObject"/>
+        <rdfs:label>food</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#Furniture -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/teleporta#Furniture">
+        <rdfs:label>furniture</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#GrabbableObject -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/teleporta#GrabbableObject">
+        <rdfs:label>grabbableobject</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#Paper -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/teleporta#Paper">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/teleporta#GrabbableObject"/>
+        <rdfs:label>paper</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#Pen -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/teleporta#Pen">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/teleporta#GrabbableObject"/>
+        <rdfs:label>pen</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#Person -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/teleporta#Person">
+        <rdfs:label>person</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#Plant -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/teleporta#Plant">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/teleporta#Furniture"/>
+        <rdfs:label>plant</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#Table -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/teleporta#Table">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/teleporta#Furniture"/>
+        <rdfs:label>table</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#WalkingFrame -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/teleporta#WalkingFrame">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/teleporta#Furniture"/>
+        <rdfs:label>walkingframe</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#Whiteboard -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/teleporta#Whiteboard">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/teleporta#Furniture"/>
+        <rdfs:label>whiteboard</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/teleporta#Window -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/teleporta#Window">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/teleporta#Furniture"/>
+        <rdfs:label>window</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Appliance"/>
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Chair"/>
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Counter"/>
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Door"/>
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Entrance"/>
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Plant"/>
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Table"/>
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#WalkingFrame"/>
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Whiteboard"/>
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Window"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Camera"/>
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Cup"/>
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Food"/>
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Paper"/>
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Pen"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Furniture"/>
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#GrabbableObject"/>
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/teleporta#Person"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
