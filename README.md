@@ -1,7 +1,7 @@
 # OG-SGG
 
 This repository contains the code developed for the paper
-"OG-SGG: Ontology-Guided Scene Graph Generation. A Case Study in Transfer Learning for Telepresence Robotics".
+["OG-SGG: Ontology-Guided Scene Graph Generation. A Case Study in Transfer Learning for Telepresence Robotics"](https://arxiv.org/abs/2202.10201).
 
 ## Environment
 
@@ -141,5 +141,8 @@ Training and testing:
 	title={{OG-SGG: Ontology-Guided Scene Graph Generation. A Case Study in Transfer Learning for Telepresence Robotics}},
 	author={Amodeo, Fernando and Caballero, Fernando and Díaz-Rodriguez, Natalia and Merino, Luis},
 	year={2022},
+	eprint={2202.10201},
+	archivePrefix={arXiv},
+	primaryClass={cs.RO}
 }
 ```
