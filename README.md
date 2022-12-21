@@ -1,20 +1,27 @@
 # OG-SGG
 
 This repository contains the code developed for the paper
-["OG-SGG: Ontology-Guided Scene Graph Generation. A Case Study in Transfer Learning for Telepresence Robotics"](https://arxiv.org/abs/2202.10201).
+["OG-SGG: Ontology-Guided Scene Graph Generation. A Case Study in Transfer Learning for Telepresence Robotics"](https://doi.org/10.1109/ACCESS.2022.3230590).
 
 ## Environment
 
-A suitable environment can be prepared using the Conda/Mamba package manager:
+A suitable environment can be prepared using the Conda/Mamba package manager ([mambaforge](https://github.com/conda-forge/miniforge#mambaforge) is recommended):
 
 ```bash
-conda create -n tf cudatoolkit=11.3 cudnn=8.2 python=3.9
-conda activate tf
-conda install cuda-nvcc=11.3 -c nvidia
-mamba install pandas matplotlib py-opencv python-graphviz tqdm pytomlpp -c conda-forge
+mamba create -n ogsgg
+mamba activate ogsgg
+
+mamba install -c conda-forge python=3.9 cudatoolkit=11.2 cudnn=8.1.0 owlready2=0.36 pandas matplotlib py-opencv python-graphviz tqdm pytomlpp
+mamba clean -af
+
 pip install tensorflow tensorflow-addons tensorflow-hub
-git clone https://github.com/tensorflow/docs tfdocs
-cd tfdocs && python setup.py install && cd ..
+pip install -U git+https://github.com/tensorflow/docs.git
+pip cache purge
+
+mamba env config vars set LD_LIBRARY_PATH=$CONDA_PREFIX/lib
+mamba env config vars set TF_CPP_MIN_LOG_LEVEL=1
+mamba deactivate
+mamba activate ogsgg
 ```
 
 The environment can be verified to work using the following python commands:
@@ -55,6 +62,18 @@ teresa/
 |___ <image.txt> ...
 |___ labels.txt
 |___ relations.txt
+```
+
+### AI2THOR
+
+[Download AI2THOR test data](https://robotics.upo.es/~famozur/ogsgg/ai2thor-testdata.zip).
+The zip archive should be decompressed, and the files within placed in the `testdata` folder:
+
+```
+testdata/
+|___ ai2thor-images.zip
+|___ ai2thor-test.json.xz
+|___ ai2thor-names.json
 ```
 
 ## Network
@@ -113,36 +132,43 @@ Loading VG:
 - `convert_vg_masks.py`: Precalculates VG object masks.
 - `convert_vg_images.py`: Preconverts VG images into feature maps using the YOLO backbone.
 - `stratify.py`: Extracts an evaluation set from the training split, respecting predicate distribution (i.e. through stratification).
+- `new_filter.py`: Generates VG-indoor from VG-SGG.
 
 Loading TERESA:
 
 - `convert_teresa_splits.py`: Loads TERESA's test split and converts it to the format used in this codebase.
-- `convert_teresa_images.py`: Precalculates TERESA object masks.
-- `convert_teresa_masks.py`: Precalculates TERESA feature maps.
-- `calc_teresa_constraint_matrix.py`: Precalculates TERESA domain/range constraint matrix.
+- `convert_teresa_images.py`: Precalculates TERESA feature maps.
+- `convert_teresa_masks.py`: Precalculates TERESA object masks.
 
-Filtering and preprocessing:
+Loading AI2THOR:
 
-- `new_filter.py`: Generates VG-indoor from VG-SGG.
-- `conv_vg_to_teresa.py`: Generates an adapted, filtered (and augmented) version of VG-SGG or VG-indoor using TERESA ontology.
+- `convert_ai2thor_images.py`: Precalculates AI2THOR feature maps.
+- `convert_ai2thor_masks.py`: Precalculates AI2THOR object masks.
+
+OG-SGG helper scripts (filtering/augmentation, post-processing):
+
+- `dataset_filter_aug.py`: Generates an adapted, filtered (and augmented) version of VG-SGG or VG-indoor using the specified ontology.
+- `calc_constraint_matrix.py`: Precalculates domain/range constraint matrix.
 - `dataset_stats.py`: Prints dataset statistics.
 
 Training and testing:
 
 - `train_telenet.py`: Trains VRD-RANS on the specified dataset.
 - `test_telenet.py`: Generates testing data for the model using the specified test set.
-- `calc_metrics_for_teresa.py`: Calculates R@K family of metrics on the TERESA test set, including the ontology-guide post-processing logic.
-- `teresa_qualitative.py`: Generates qualitative results on the TERESA test set, including the ontology-guide post-processing logic.
+- `ogsgg_quantitative.py`: Calculates R@K family of metrics on the given test set, including the ontology-guide post-processing logic.
+- `ogsgg_qualitative.py`: Generates qualitative results on the given test set, including the ontology-guide post-processing logic.
 
 ## Reference
 
 ```tex
 @article{ogsgg2022,
+	journal={IEEE Access},
 	title={{OG-SGG: Ontology-Guided Scene Graph Generation. A Case Study in Transfer Learning for Telepresence Robotics}},
-	author={Amodeo, Fernando and Caballero, Fernando and Díaz-Rodriguez, Natalia and Merino, Luis},
+	author={Amodeo, Fernando and Caballero, Fernando and Díaz-Rodríguez, Natalia and Merino, Luis},
 	year={2022},
-	eprint={2202.10201},
-	archivePrefix={arXiv},
-	primaryClass={cs.RO}
+	volume={},
+	number={},
+	pages={1-1},
+	doi={10.1109/ACCESS.2022.3230590}
 }
 ```

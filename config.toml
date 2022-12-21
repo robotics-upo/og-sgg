@@ -9,7 +9,7 @@ teresa = "/mnt/data/work/datasets/teresa"
 
 # Others
 yolo = "/mnt/data/work/yolo-weights/yolov4-320"
-java = "/home/feramozur/Downloads/Protege-5.5.0/jre/bin/java"
+java = "/home/feramozur/bin/Protege-5.5.0/jre/bin/java"
 
 [model]
 
@@ -49,7 +49,8 @@ use_post_proc = true
 
 [convert]
 
-dataset = "vg"
+source = "vg"
+destination = "ai2thor"
 augmentation = true
 
 [stratify]
@@ -72,3 +73,19 @@ prefers_object  = [ "table", "counter" ]
 "holding"     = [ "carrying", "holding" ]
 "sitting at"  = [ "sitting on" ]
 "sitting on"  = [ "sitting on" ]
+
+[ai2thor.qualitative]
+
+prefers_subject = []
+prefers_object = []
+
+[ai2thor.predicate_map]
+
+"above"       = [ "above" ]
+"below"       = [ ] # inverse of above
+"has"         = [ "has" ]
+"near"        = [ "near" ]
+"lying on"    = [ "lying on" ]
+"sitting on"  = [ "sitting on" ]
+"standing on" = [ "standing on" ]
+"part of"     = [ ] # inverse of has

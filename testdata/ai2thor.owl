@@ -1,0 +1,723 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://robotics.upo.es/ontologies/untitled-ontology-73#"
+     xml:base="http://robotics.upo.es/ontologies/untitled-ontology-73"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#above -->
+
+    <owl:ObjectProperty rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#above">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#below"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:label>above</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#below -->
+
+    <owl:ObjectProperty rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#below">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:label>below</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#has -->
+
+    <owl:ObjectProperty rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#has">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#part_of"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Component"/>
+                    <rdf:Description rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Furniture"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#Component"/>
+        <rdfs:label>has</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#lying_on -->
+
+    <owl:ObjectProperty rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#lying_on">
+        <rdfs:subPropertyOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#on"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:complementOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#Furniture"/>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#SoftFurniture"/>
+        <rdfs:label>lying on</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#near -->
+
+    <owl:ObjectProperty rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#near">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:label>near</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#on -->
+
+    <owl:ObjectProperty rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#on">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:label>on</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#part_of -->
+
+    <owl:ObjectProperty rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#part_of">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#Component"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Component"/>
+                    <rdf:Description rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Furniture"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+        <rdfs:label>part of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#sitting_on -->
+
+    <owl:ObjectProperty rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#sitting_on">
+        <rdfs:subPropertyOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#on"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:complementOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#Furniture"/>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range>
+            <owl:Class>
+                <owl:complementOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#SoftFurniture"/>
+            </owl:Class>
+        </rdfs:range>
+        <rdfs:label>sitting on</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#standing_on -->
+
+    <owl:ObjectProperty rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#standing_on">
+        <rdfs:subPropertyOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#on"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#Furniture"/>
+        <rdfs:label>standing on</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#AlarmClock -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#AlarmClock">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#BoringObject"/>
+        <rdfs:label>AlarmClock</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Apple -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Apple">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>Apple</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#ArmChair -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#ArmChair">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#SoftFurniture"/>
+        <rdfs:label>ArmChair</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#BaseballBat -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#BaseballBat">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>BaseballBat</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#BasketBall -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#BasketBall">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>BasketBall</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Bed -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Bed">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#SoftFurniture"/>
+        <rdfs:label>Bed</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Book -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Book">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>Book</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#BoringObject -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#BoringObject">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#Object"/>
+        <rdfs:label>BackgroundObject</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Bottle -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Bottle">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>Bottle</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Bowl -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Bowl">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>Bowl</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Box -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Box">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#BoringObject"/>
+        <rdfs:label>Box</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#ButterKnife -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#ButterKnife">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>ButterKnife</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#CD -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#CD">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>CD</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Candle -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Candle">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>Candle</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#CellPhone -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#CellPhone">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>CellPhone</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Chair -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Chair">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#HardFurniture"/>
+        <rdfs:label>Chair</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#CoffeeTable -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#CoffeeTable">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#HardFurniture"/>
+        <rdfs:label>CoffeeTable</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Component -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Component">
+        <rdfs:label>Component</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Cup -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Cup">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>Cup</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Desk -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Desk">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#HardFurniture"/>
+        <rdfs:label>Desk</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#DeskLamp -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#DeskLamp">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#BoringObject"/>
+        <rdfs:label>DeskLamp</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#DiningTable -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#DiningTable">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#HardFurniture"/>
+        <rdfs:label>DiningTable</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Drawer -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Drawer">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#Component"/>
+        <rdfs:label>Drawer</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Dresser -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Dresser">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#HardFurniture"/>
+        <rdfs:label>Dresser</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Floor -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Floor">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#HardFurniture"/>
+        <rdfs:label>Floor</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#FloorLamp -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#FloorLamp">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#BoringObject"/>
+        <rdfs:label>FloorLamp</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Fork -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Fork">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>Fork</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Furniture -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Furniture">
+        <rdfs:label>Furniture</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#GarbageCan -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#GarbageCan">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#BoringObject"/>
+        <rdfs:label>GarbageCan</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#HardFurniture -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#HardFurniture">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#Furniture"/>
+        <rdfs:label>HardFurniture</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#HousePlant -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#HousePlant">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#BoringObject"/>
+        <rdfs:label>HousePlant</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#Object"/>
+        <rdfs:label>FocusObject</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Laptop -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Laptop">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>Laptop</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Mug -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Mug">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>Mug</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Newspaper -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Newspaper">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>Newspaper</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Object -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Object">
+        <rdfs:label>Object</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Painting -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Painting">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#BoringObject"/>
+        <rdfs:label>Painting</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Pen -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Pen">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>Pen</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Pencil -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Pencil">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>Pencil</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#PepperShaker -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#PepperShaker">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>PepperShaker</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Pillow -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Pillow">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>Pillow</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Plate -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Plate">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>Plate</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Pot -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Pot">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>Pot</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#RemoteControl -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#RemoteControl">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>RemoteControl</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#SaltShaker -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#SaltShaker">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>SaltShaker</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Shelf -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Shelf">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#Component"/>
+        <rdfs:label>Shelf</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#ShelvingUnit -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#ShelvingUnit">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#HardFurniture"/>
+        <rdfs:label>ShelvingUnit</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#SideTable -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#SideTable">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#HardFurniture"/>
+        <rdfs:label>SideTable</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Sofa -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Sofa">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#SoftFurniture"/>
+        <rdfs:label>Sofa</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#SoftFurniture -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#SoftFurniture">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#Furniture"/>
+        <rdfs:label>SoftFurniture</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#SprayBottle -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#SprayBottle">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>SprayBottle</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Statue -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Statue">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#BoringObject"/>
+        <rdfs:label>Statue</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#TVStand -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#TVStand">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#HardFurniture"/>
+        <rdfs:label>TVStand</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#TeddyBear -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#TeddyBear">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>TeddyBear</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Television -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Television">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#BoringObject"/>
+        <rdfs:label>Television</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#TennisRacket -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#TennisRacket">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>TennisRacket</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Vase -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Vase">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>Vase</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://robotics.upo.es/ontologies/untitled-ontology-73#Watch -->
+
+    <owl:Class rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#Watch">
+        <rdfs:subClassOf rdf:resource="http://robotics.upo.es/ontologies/untitled-ontology-73#InterestingObject"/>
+        <rdfs:label>Watch</rdfs:label>
+    </owl:Class>
+    <rdf:Description>
+        <rdfs:label>Placeholder</rdfs:label>
+    </rdf:Description>
+    <rdf:Description>
+        <rdfs:label>Placeholder</rdfs:label>
+    </rdf:Description>
+    <rdf:Description>
+        <rdfs:label>Placeholder</rdfs:label>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointProperties"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#lying_on"/>
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#sitting_on"/>
+            <rdf:Description rdf:about="http://robotics.upo.es/ontologies/untitled-ontology-73#standing_on"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

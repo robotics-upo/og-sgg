@@ -2,6 +2,7 @@ import zipfile
 import io
 import json
 import colorsys
+import os
 
 import cv2
 import numpy as np
@@ -14,14 +15,16 @@ from tqdm import tqdm
 from pathlib import Path
 from graphviz import Digraph
 
-DATASET_NAME = 'vg'
-MODEL_VARIANT = 'VgBaseDec15+QuadroTest'
-USE_POST_PROC = False
+TRAIN_BASE_NAMES = 'vg'
+TEST_DATASET     = 'ai2thor'
+MODEL_VARIANT    = 'Ai2Thor+VgSgg+Filter'
+USE_POST_PROC    = True
 
-tn_data.load_names(f'teresa-names.json')
-PAIR_CONSTRAINTS = tn_data.load_npy_xz(f'teresa-pair-constraints')
+tn_data.load_names(f'{TEST_DATASET}-names.json')
+PAIR_CONSTRAINTS = tn_data.load_npy_xz(f'{TEST_DATASET}-pair-constraints')
 owl.JAVA_EXE = tn_config('paths.java')
-onto = owl.get_ontology(Path(tn_data.path('TeleportaOnto.owl')).as_uri()).load()
+onto = owl.get_ontology(Path(tn_data.path(f'{TEST_DATASET}.owl')).as_uri()).load()
+with onto: owl.sync_reasoner()
 
 ONTO_CLS  = [ onto.search_one(label=label.replace(' ','')) for label in tn_data.CLASS_NAMES ]
 ONTO_RELS = [ onto.search_one(label=label) for label in tn_data.REL_NAMES ]
@@ -29,21 +32,24 @@ ONTO_REL_OBJ_TO_ID = { rel:i for i,rel in enumerate(ONTO_RELS) }
 ONTO_INV = [ ONTO_REL_OBJ_TO_ID.get(rel.inverse_property, -1) for rel in ONTO_RELS]
 # Note that symmetric predicates get tagged as their own inverses
 
-PREFERS_SUBJECT = tn_config('teresa.qualitative.prefers_subject')
+PREFERS_SUBJECT = tn_config(f'{TEST_DATASET}.qualitative.prefers_subject')
 PREFERS_SUBJECT = set(tn_data.CLASS_NAME_TO_ID[x] for x in PREFERS_SUBJECT)
-PREFERS_OBJECT  = tn_config('teresa.qualitative.prefers_object')
+PREFERS_OBJECT  = tn_config(f'{TEST_DATASET}.qualitative.prefers_object')
 PREFERS_OBJECT  = set(tn_data.CLASS_NAME_TO_ID[x] for x in PREFERS_OBJECT)
 
-zf_scores = zipfile.ZipFile(f'test-results/teresa+{MODEL_VARIANT}.zip', 'r')
-testimgs = tn_data.load_json_xz(f'teresa-test')
+zf_images = zipfile.ZipFile(tn_data.path(f'{TEST_DATASET}-images.zip'), 'r')
+zf_scores = zipfile.ZipFile(f'test-results/{TEST_DATASET}+{MODEL_VARIANT}.zip', 'r')
+testimgs = tn_data.load_json_xz(f'{TEST_DATASET}-test')
 
-if DATASET_NAME != 'teresa':
-	with open(tn_data.path(f'{DATASET_NAME}-names.json'), 'rt', encoding='utf-8') as f:
+if TRAIN_BASE_NAMES != TEST_DATASET:
+	with open(tn_data.path(f'{TRAIN_BASE_NAMES}-names.json'), 'rt', encoding='utf-8') as f:
 		VG_REL_NAMES = json.load(f)['rels']
 		VG_REL_TO_ID = { k:i for i,k in enumerate(VG_REL_NAMES) }
 
-	TERESA_TO_VG = tn_config('teresa.predicate_map')
-	TERESA_TO_VG = { tn_data.CLASS_REL_TO_ID[k]:tuple(VG_REL_TO_ID[p] for p in v) for k,v in TERESA_TO_VG.items() }
+	PREDICATE_MAP = tn_config(f'{TEST_DATASET}.predicate_map')
+	PREDICATE_MAP = { tn_data.CLASS_REL_TO_ID[k]:tuple(VG_REL_TO_ID[p] for p in v) for k,v in PREDICATE_MAP.items() }
+
+os.makedirs(f'qualit-{TEST_DATASET}/', exist_ok=True)
 
 def color_wheel(i,n):
 	return tuple(int(128 + 127*x + .5) for x in colorsys.hsv_to_rgb(float(i)/n, 1., 1.))
@@ -83,9 +89,9 @@ def generate_pairs(N):
 			if i != j:
 				yield (i,j)
 
-def convert_vg_to_teresa(vg_scores):
+def convert_train_to_test(vg_scores):
 	t_scores = np.full((tn_data.NUM_RELS,), np.nan)
-	for i,tup in TERESA_TO_VG.items():
+	for i,tup in PREDICATE_MAP.items():
 		scores = np.take(vg_scores, tup)
 		scores = scores[np.isfinite(scores)]
 		if scores.size != 0:
@@ -100,9 +106,9 @@ def generate_pairs_for_preddet(all_scores, objs):
 	def generator():
 		for i,(src,dst) in enumerate(generate_pairs(num_objs)):
 			scores = all_scores[i]
-			if DATASET_NAME == 'vg' or DATASET_NAME == 'vgfilter':
-				scores = convert_vg_to_teresa(scores)
-			elif DATASET_NAME != 'teresa':
+			if TRAIN_BASE_NAMES == 'vg' or TRAIN_BASE_NAMES == 'vgfilter':
+				scores = convert_train_to_test(scores)
+			elif TRAIN_BASE_NAMES != TEST_DATASET:
 				raise Exception("Dunno what to do")
 			if USE_POST_PROC:
 				constr = PAIR_CONSTRAINTS[objs[src]['v'], objs[dst]['v'], :]
@@ -123,7 +129,9 @@ for img in tqdm(testimgs):
 		print(f'Image with problem: {id}')
 		continue
 
-	imgdata = cv2.imread(f'/mnt/data/work/datasets/teresa/handpicked/{id}.jpg')
+	imgdata = zf_images.read(f'rgb/{id}.jpg')
+	imgdata = np.frombuffer(imgdata, np.uint8)
+	imgdata = cv2.imdecode(imgdata, cv2.IMREAD_COLOR)
 
 	objlblcnt = {}
 	objnames = []
@@ -137,7 +145,7 @@ for img in tqdm(testimgs):
 		objlabels.append(f'<{objclsname}<SUB>{objclsnum}</SUB>>')
 		draw_bbox(imgdata, obj['bb'], color_wheel(len(objlabels)-1, len(img['objs'])), objname)
 
-	cv2.imwrite(f'qualit/{id}_ann.jpg', imgdata)
+	cv2.imwrite(f'qualit-{TEST_DATASET}/{id}_ann.jpg', imgdata)
 
 	triplets = []
 	for src,dst,scores in pairs():
@@ -209,23 +217,11 @@ for img in tqdm(testimgs):
 	num_accepted = 0
 	key_triplets = []
 	for score,rel,src,dst in triplets:
-		if num_accepted >= 16: #(USE_POST_PROC and score <= 0) or
+		if num_accepted >= 16:
 			break
 		if add_triplet(src,dst,rel):
 			num_accepted += 1
 			key_triplets.append((src,dst,rel,score))
-
-	"""
-	for src,dst,rel in accepted_triplets:
-		attrs = { 'xlabel': tn_data.REL_NAMES[rel] }
-		if (dst,src,rel) in accepted_triplets:
-			if dst < src:
-				continue
-			attrs['dir'] = 'both'
-		g.edge(f'o{src}', f'o{dst}', **attrs)
-
-	g.render(f'qualit/{id}+{MODEL_VARIANT}+Preproc={"True" if USE_POST_PROC else "False"}.gv')
-	"""
 
 	print(f'Image {id}:')
 	for src,dst,rel,score in key_triplets:
@@ -241,4 +237,4 @@ for img in tqdm(testimgs):
 			attrs['dir'] = 'both'
 		g.edge(f'o{src}', f'o{dst}', **attrs)
 
-	g.render(f'qualit/{id}+{MODEL_VARIANT}+Preproc={"True" if USE_POST_PROC else "False"}.gv')
+	g.render(f'qualit-{TEST_DATASET}/{id}+{MODEL_VARIANT}+Preproc={"True" if USE_POST_PROC else "False"}.gv')

@@ -9,15 +9,14 @@ from telenet.config import get as tn_config
 from tqdm import tqdm
 from pathlib import Path
 
-DATASET_NAME = 'teresa'
+DATASET_NAME = 'ai2thor'
 tn_data.load_names(f'{DATASET_NAME}-names.json')
 owl.JAVA_EXE = tn_config('paths.java')
-onto = owl.get_ontology(Path(tn_data.path('TeleportaOnto.owl')).as_uri()).load()
+onto = owl.get_ontology(Path(tn_data.path(f'{DATASET_NAME}.owl')).as_uri()).load()
+with onto: owl.sync_reasoner()
 
 ONTO_CLS  = [ onto.search_one(label=label.replace(' ','')) for label in tn_data.CLASS_NAMES ]
 ONTO_RELS = [ onto.search_one(label=label) for label in tn_data.REL_NAMES ]
-
-q = owl.Not
 
 def is_compat(lhs, rhs):
 	if lhs == rhs:
@@ -57,5 +56,5 @@ for rel in ONTO_RELS:
 
 relcompat = np.stack(relcompat, axis=-1)
 
-with lzma.open(f'testdata/{DATASET_NAME}-pair-constraints.npy.xz', 'wb') as f:
+with lzma.open(tn_data.path(f'{DATASET_NAME}-pair-constraints.npy.xz'), 'wb') as f:
 	np.save(f, relcompat)

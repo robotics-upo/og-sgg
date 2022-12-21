@@ -39,6 +39,8 @@ MODEL_VARIANT = tn_config('model.variant')
 
 if 'teresa' in DATASET_NAME:
 	tn_data.load_names(f'teresa-names.json')
+elif 'ai2thor' in DATASET_NAME:
+	tn_data.load_names(f'ai2thor-names.json')
 else:
 	tn_data.load_names(f'{DATASET_NAME}-names.json')
 
@@ -50,6 +52,7 @@ for known_dataset in ['vrd', 'vg', DATASET_NAME]:
 		SEM_VECTORS = tf.convert_to_tensor(np.load(tn_data.path(f'{known_dataset}-semvecs.npy')))
 		zf_pi = zipfile.ZipFile(tn_data.path(f'{known_dataset}-yolo-train.zip'), 'r')
 		zf_om = zipfile.ZipFile(tn_data.path(f'{known_dataset}-mask-train.zip'), 'r')
+		break
 
 def get_priors(src,dst):
 	return np.zeros((tn_data.NUM_RELS,), np.float32)

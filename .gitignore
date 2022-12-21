@@ -4,6 +4,9 @@ train-results/
 test-results/
 tensorboard/
 qualit/
+qualit-*/
+saved/
+gt-*/
 __pycache__/
 *~
 *.npy

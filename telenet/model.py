@@ -45,11 +45,11 @@ class RelationshipDetector(tf.keras.Model):
 		self.attention = tf.keras.Sequential([
 			tf.keras.layers.Reshape((1,1,-1), input_shape=(base_len,)),
 			tf.keras.layers.Conv2DTranspose(base_len//4, kernel_size=(3,3), strides=(2,2), padding='same', kernel_initializer='he_uniform'),
-			tf.keras.layers.PReLU(shared_axes=[1, 2]),
+			tf.keras.layers.ReLU(),
 			tf.keras.layers.Conv2DTranspose(base_len//16, kernel_size=(3,3), strides=(2,2), padding='same', kernel_initializer='he_uniform'),
-			tf.keras.layers.PReLU(shared_axes=[1, 2]),
+			tf.keras.layers.ReLU(),
 			tf.keras.layers.Conv2DTranspose(base_len//64, kernel_size=(3,3), strides=(2,2), padding='same', kernel_initializer='he_uniform'),
-			tf.keras.layers.PReLU(shared_axes=[1, 2]),
+			tf.keras.layers.ReLU(),
 			tf.keras.layers.Conv2DTranspose(1, kernel_size=(3,3), strides=(2,2), padding='same', kernel_initializer='he_uniform'),
 			tf.keras.layers.Resizing(10, 10),
 			tf.keras.layers.Softmax(axis=[1,2])
@@ -99,6 +99,44 @@ class CombinedRelationshipDetector(tf.keras.Model):
 	@tf.function
 	def call(self, input, training=False):
 		feature_map, obj_mask, sem_vec1, sem_vec2, prior = input
+		if len(feature_map.shape) == 3:
+			feature_map = tf.expand_dims(feature_map, axis=0)
+		if obj_mask.shape[1] == 2:
+			obj_mask = tf.transpose(obj_mask, perm=(0,2,3,1))
 		nonvis_vec = self.vecgen((obj_mask, sem_vec1, sem_vec2), training=training)
 		x= self.reldec((nonvis_vec, feature_map, prior), training=training)
+		return x
+
+class TrivialRelationshipDetector(tf.keras.Model):
+	def __init__(self, N, sem_embed_size=250, **kwargs):
+		super().__init__(**kwargs)
+		self.dense = tf.keras.layers.Dense(50*16, input_shape=(sem_embed_size*2,), activation=tf.nn.relu,kernel_initializer='he_uniform')
+		self.bn = tf.keras.layers.BatchNormalization()
+		self.scoring = tf.keras.layers.Dense(N, dtype='float32', kernel_initializer='orthogonal')
+
+	@tf.function
+	def call(self, input, training=False):
+		feature_map, obj_mask, sem_vec1, sem_vec2, prior = input
+		x = tf.concat([sem_vec1, sem_vec2], axis=-1)
+		x = self.dense(x, training=training)
+		x = self.bn(x, training=training)
+		x = self.scoring(x, training=training)
+		return x
+
+class SlightlyLessTrivialRelationshipDetector(tf.keras.Model):
+	def __init__(self, N, sem_embed_size=250, **kwargs):
+		super().__init__(**kwargs)
+		self.mask2vec = Mask2Vec(sem_embed_size)
+		self.dense = tf.keras.layers.Dense(50*24, input_shape=(sem_embed_size*3,), activation=tf.nn.relu,kernel_initializer='he_uniform')
+		self.bn = tf.keras.layers.BatchNormalization()
+		self.scoring = tf.keras.layers.Dense(N, dtype='float32', kernel_initializer='orthogonal')
+
+	@tf.function
+	def call(self, input, training=False):
+		feature_map, obj_mask, sem_vec1, sem_vec2, prior = input
+		obj_vec = self.mask2vec(obj_mask)
+		x = tf.concat([sem_vec1, sem_vec2, obj_vec], axis=-1)
+		x = self.dense(x, training=training)
+		x = self.bn(x, training=training)
+		x = self.scoring(x, training=training)
 		return x

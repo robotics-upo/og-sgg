@@ -12,23 +12,25 @@ from telenet.config import get as tn_config
 from tqdm import tqdm
 from pathlib import Path
 
-DATASET_NAME = tn_config('convert.dataset')
+SRC_DATASET_NAME = tn_config('convert.source')
+DST_DATASET_NAME = tn_config('convert.destination')
 DO_AUGMENTATION = tn_config('convert.augmentation')
 
 def reversemultimap(a):
 	for k,v in a.items():
 		for p in v: yield (p,k)
 
-with open(tn_data.path(f'{DATASET_NAME}-names.json'), 'rt', encoding='utf-8') as f:
+with open(tn_data.path(f'{SRC_DATASET_NAME}-names.json'), 'rt', encoding='utf-8') as f:
 	VG_REL_NAMES = json.load(f)['rels']
 	VG_REL_TO_ID = { k:i for i,k in enumerate(VG_REL_NAMES) }
 
-tn_data.load_names('teresa-names.json')
-TERESA_TO_VG = tn_config('teresa.predicate_map')
-VG_TO_TERESA = { VG_REL_TO_ID[p]:tn_data.CLASS_REL_TO_ID[k] for p,k in reversemultimap(TERESA_TO_VG) }
+tn_data.load_names(f'{DST_DATASET_NAME}-names.json')
+DST_TO_SRC = tn_config(f'{DST_DATASET_NAME}.predicate_map')
+SRC_TO_DST = { VG_REL_TO_ID[p]:tn_data.CLASS_REL_TO_ID[k] for p,k in reversemultimap(DST_TO_SRC) }
 
 owl.JAVA_EXE = tn_config('paths.java')
-onto = owl.get_ontology(Path(tn_data.path('TeleportaOnto.owl')).as_uri()).load()
+onto = owl.get_ontology(Path(tn_data.path(f'{DST_DATASET_NAME}.owl')).as_uri()).load()
+with onto: owl.sync_reasoner()
 ONTO_RELS = [ onto.search_one(label=label) for label in tn_data.REL_NAMES ]
 
 class GenericObject(owl.Thing):
@@ -52,7 +54,7 @@ def convert_split(split):
 		for rel in img['rels']:
 			srcdst = (rel['si'], rel['di'])
 			for v in rel['v']:
-				relid = VG_TO_TERESA.get(v, -1)
+				relid = SRC_TO_DST.get(v, -1)
 				if relid < 0: continue
 				pair = relmap.get(srcdst, None)
 				if not pair: pair = relmap[srcdst] = set()
@@ -129,7 +131,7 @@ def convert_split(split):
 	print('new numrels', numrels_new)
 	return out_split
 
-TERESA_TRAIN = convert_split(tn_data.load_json_xz(f'{DATASET_NAME}-train'))
+train_split = convert_split(tn_data.load_json_xz(f'{SRC_DATASET_NAME}-train'))
 
-with lzma.open(f'testdata/{DATASET_NAME}teresa{"" if DO_AUGMENTATION else "noaug"}-train.json.xz', 'wt', encoding='utf-8') as f:
-	json.dump(TERESA_TRAIN, f)
+with lzma.open(f'testdata/{SRC_DATASET_NAME}{DST_DATASET_NAME}{"" if DO_AUGMENTATION else "noaug"}-train.json.xz', 'wt', encoding='utf-8') as f:
+	json.dump(train_split, f)
