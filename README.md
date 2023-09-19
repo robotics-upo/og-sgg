@@ -172,3 +172,9 @@ Training and testing:
 	doi={10.1109/ACCESS.2022.3230590}
 }
 ```
+
+## Acknowledgement
+
+![](logos.png)
+
+This publication has been financed by the European Regional Development Fund (FEDER) and by the Ministry of Economy, Knowledge, Business and University, of the Government of Andalucía , within the framework of the FEDER Andalucía 2014-2020 operational program. Specific objective 1.2.3. "Promotion and generation of frontier knowledge and knowledge oriented to the challenges of society, development of emerging technologies" within the framework of the reference research project UPO-1264631. FEDER co-financing percentage 80%
