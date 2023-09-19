@@ -177,4 +177,6 @@ Training and testing:
 
 ![](logos.png)
 
-This publication has been financed by the European Regional Development Fund (FEDER) and by the Ministry of Economy, Knowledge, Business and University, of the Government of Andalucía , within the framework of the FEDER Andalucía 2014-2020 operational program. Specific objective 1.2.3. "Promotion and generation of frontier knowledge and knowledge oriented to the challenges of society, development of emerging technologies" within the framework of the reference research project UPO-1264631. FEDER co-financing percentage 80%
+![](logos2.png)
+
+This publication has been financed by the European Regional Development Fund (FEDER) and by the Ministry of Economy, Knowledge, Business and University, of the Government of Andalucía , within the framework of the FEDER Andalucía 2014-2020 operational program. Specific objective 1.2.3. "Promotion and generation of frontier knowledge and knowledge oriented to the challenges of society, development of emerging technologies" within the framework of the reference research project UPO-1264631. FEDER co-financing percentage 80%, and the projects NHoA (PLEC2021-007868), funded by MCIN/AEI/10.13039/501100011033 and the European Union NextGenerationEU/PRTR.
